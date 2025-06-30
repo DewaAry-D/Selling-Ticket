@@ -210,6 +210,9 @@
   .absolute {
     position: absolute;
   }
+  .fixed {
+    position: fixed;
+  }
   .relative {
     position: relative;
   }
@@ -665,6 +668,9 @@
   .h-\[400px\] {
     height: 400px;
   }
+  .h-\[500px\] {
+    height: 500px;
+  }
   .w-1 {
     width: calc(var(--spacing) * 1);
   }
@@ -689,8 +695,14 @@
   .w-1191 {
     width: calc(var(--spacing) * 1191);
   }
+  .w-\[0\%\] {
+    width: 0%;
+  }
   .w-\[3\] {
     width: 3;
+  }
+  .w-\[27px\] {
+    width: 27px;
   }
   .w-\[30\%\] {
     width: 30%;
@@ -736,6 +748,15 @@
   }
   .w-\[100px\] {
     width: 100px;
+  }
+  .w-\[275px\] {
+    width: 275px;
+  }
+  .w-\[280px\] {
+    width: 280px;
+  }
+  .w-\[290px\] {
+    width: 290px;
   }
   .w-\[400px\] {
     width: 400px;
@@ -931,11 +952,29 @@
   .gap-6 {
     gap: calc(var(--spacing) * 6);
   }
+  .gap-10 {
+    gap: calc(var(--spacing) * 10);
+  }
+  .gap-12 {
+    gap: calc(var(--spacing) * 12);
+  }
+  .gap-14 {
+    gap: calc(var(--spacing) * 14);
+  }
+  .gap-15 {
+    gap: calc(var(--spacing) * 15);
+  }
   .gap-16 {
     gap: calc(var(--spacing) * 16);
   }
+  .gap-\[1px\] {
+    gap: 1px;
+  }
   .gap-\[13px\] {
     gap: 13px;
+  }
+  .gap-\[14px\] {
+    gap: 14px;
   }
   .gap-\[35px\] {
     gap: 35px;
@@ -1139,6 +1178,9 @@
   }
   .px-14 {
     padding-inline: calc(var(--spacing) * 14);
+  }
+  .px-16 {
+    padding-inline: calc(var(--spacing) * 16);
   }
   .px-64 {
     padding-inline: calc(var(--spacing) * 64);
