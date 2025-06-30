@@ -4,14 +4,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx @tailwindcss/cli -i ./resource/tailwind/resource/tailwind/input.css -o ./resource/tailwind/output.css --watch"
+    "dev": "npx @tailwindcss/cli -i ./resource/tailwind/input.css -o ./resource/tailwind/output.css --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@tailwindcss/cli": "^4.1.10",
+    "@tailwindcss/cli": "^4.1.11",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.5.0",
@@ -21,7 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.1",
     "qrcode": "^1.5.4",
-    "tailwindcss": "^4.1.10",
+    "tailwindcss": "^4.1.11",
     "uuid": "^11.1.0"
   }
 }
