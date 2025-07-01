@@ -28,7 +28,7 @@ class QrList {
     }
 
     append(id, orderitem_id, ticket_code, qr_code,) {
-        const newNode = new CartNode(id, orderitem_id, ticket_code, qr_code, new Date());
+        const newNode = new QrNode(id, orderitem_id, ticket_code, qr_code, new Date());
         if (!this.head) {
             this.head = this.tail = newNode;
         } else {
@@ -72,7 +72,7 @@ class QrList {
         let current = this.head;
 
         while(current) {
-            if (current.id === cart_id) {
+            if (current.id === orderitem_id) {
                 if (current.prev) {
                     current.prev.next = current.next;
                 } else {

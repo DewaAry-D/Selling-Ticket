@@ -3,6 +3,8 @@ require('dotenv').config({ path: '.env.development' });
 const path = require('path');
 const cookieParser = require('cookie-parser');
 
+const { adminPromise } = require('./app/model/admin.model');
+
 const app = express();
 
 app.set('views', path.join(__dirname, 'resource', 'views'));
@@ -22,6 +24,13 @@ const cartRoutes = require('./routes/cart.route');
 //     const data = "ary"; 
 //     res.render('index', {data});
 // });
+
+(async () => {
+    const admin = await adminPromise;
+    console.log('Admin berhasil dibuat saat server start:');
+    console.log(admin.toJSON());
+})();
+
 
 app.use('/', authRoutes);
 app.use('/', ticketApplicationRoutes);

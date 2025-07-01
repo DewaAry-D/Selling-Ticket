@@ -21,7 +21,6 @@ class TicketApplicationNode {
         is_rejected = false,
         reject_message = null,
         created_at,
-        update_at
     }) {
         this.id = id;                         
         this.user_id = user_id;                   
@@ -44,7 +43,7 @@ class TicketApplicationNode {
         this.is_rejected = is_rejected;           
         this.reject_message = reject_message;     
         this.created_at = created_at;             
-        this.update_at = update_at;     
+        this.updated_at = updated_at;     
         
         this.prev = null;
         this.next = null;
@@ -73,7 +72,7 @@ class TicketApplicationNode {
             is_rejected: this.is_rejected,
             reject_message: this.reject_message,
             created_at: this.created_at,
-            update_at: this.update_at
+            updated_at: this.updated_at
         };
     }
 }
@@ -164,7 +163,7 @@ class TicketApplicationList {
                     }
                 }
 
-                current.update_at = new Date();
+                current.updated_at = new Date();
 
                 return current;
             }

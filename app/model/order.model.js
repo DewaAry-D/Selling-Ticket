@@ -30,7 +30,7 @@ class OrderList {
     }
 
     append(id, user_id, order_number, total_price) {
-        const newNode = new CartNode(id, user_id, order_number, ticket_id, total_price, new Date(), new Date());
+        const newNode = new OrderNode(id, user_id, order_number, ticket_id, total_price, new Date(), new Date());
         if (!this.head) {
             this.head = this.tail = newNode;
         } else {
@@ -74,7 +74,7 @@ class OrderList {
         let current = this.head;
 
         while(current) {
-            if (current.id === cart_id) {
+            if (current.id === order_id) {
                 if (current.prev) {
                     current.prev.next = current.next;
                 } else {
