@@ -8,6 +8,9 @@ const { authMiddleware } = require('../app/middlewares/auth.middleware');
 
 const router = Router();
 
+router.get('/register', (req, res) => {
+    res.render('register');
+});
 router.post('/register', upload.single('foto_profile'), registerValidator, register);
 
 router.get('/login', (req, res) => {

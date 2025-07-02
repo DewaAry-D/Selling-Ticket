@@ -28,13 +28,14 @@ const register = async (req, res) => {
     const newBiodata = biodataList.append(biodataId, newUser, data.name, data.date_of_birth, data.phone_number, data.province, data.city, data.address, fotoProfile);
     const newWallet = userWalletList.append(walletId, newUser);
 
-    return res.status(201).json({
-        status: "sukses",
-        message: "User berhasil dibuat",
-        user: newUser,
-        biodata: newBiodata,
-        newWallet: newWallet
-    })
+    // return res.status(201).json({
+    //     status: "sukses",
+    //     message: "User berhasil dibuat",
+    //     user: newUser,
+    //     biodata: newBiodata,
+    //     newWallet: newWallet
+    // })
+    return res.redirect('/login')
 }
 
 const show = async (req, res) => {
