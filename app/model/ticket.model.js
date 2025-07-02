@@ -157,7 +157,7 @@ class TicketList {
                     }
                 }
 
-                current.update_at = new Date();
+                current.updated_at = new Date();
 
                 return current;
             }

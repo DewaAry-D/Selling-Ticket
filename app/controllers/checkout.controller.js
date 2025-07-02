@@ -11,6 +11,10 @@ const { cartList } = require('../model/cart.model');
 const { orderList } = require('../model/order.model');
 const { orderItemList } = require('../model/order_item.model');
 const { qrList } = require('../model/qr_code.modul');
+const { userWalletList } = require('../model/user_wallet.model');
+const { userWalletTransactionList } = require('../model/user_wallet_transaction.model');
+const { adminWaletList } = require('../model/admin_wallet.model');
+const { adminWaletTransactionList } = require('../model/admin_wallet_transaction.model');
 
 const qrFolderPath = path.join(__dirname, '../public/', 'qrcodes');
 if (!fs.existsSync(qrFolderPath)) {
@@ -32,6 +36,8 @@ const checkout =  async (req, res) => {
     let rolebackOrder;
     let roleBackItems = [];
     let roleBackQrs = [];
+    let roleBackUserT = [];
+    let roleBackAdminT;
 
     let arryTampungTickets = [];
 
@@ -47,10 +53,11 @@ const checkout =  async (req, res) => {
         //oreder items
         for (const cart of carts) {
             const orderItemId = uuidv4();
-
             //mmasukkan ke linkedlist
             const totalPrice = cart.quantity * cart.ticket_id.price;
             total += totalPrice;
+
+            let limit = cart.ticket_id.available_limit;
 
             const orderItem = orderItemList.append(orderItemId, orderId, cart.ticket_id, cart.quantity, cart.ticket_id.price, totalPrice);
 
@@ -68,6 +75,12 @@ const checkout =  async (req, res) => {
                     code: ticketCode,
                     type: cart.ticket_id.type_tickets,
                     batch: cart.ticket_id.batch
+                }
+
+                limit -= 1;
+                if (limit <= 0) {
+                    throw new Error(`jumlah ticket untuk ticket ${cart.ticket_id}`);
+                    
                 }
 
                 //buat qrcode
@@ -93,11 +106,19 @@ const checkout =  async (req, res) => {
             });
 
             //user walet
+            const walletPenjual = userWalletList.findByUserId(cart.ticket_id.user_id.id);
+            const wTransactionId = uuidv4();
+            userWalletTransactionList.append(wTransactionId, walletPenjual, "kredit", totalPrice, orderItem,);
+            roleBackUserT.push(wTransactionId);
         }
 
-        //admin walet
+        
         total += fee;
         orderList.updateById(orderItem.id, { total_price: total });
+        //admin walet
+        const uTransactionId = uuidv4();
+        adminWaletList.append(uTransactionId, )
+
 
         for (const ticket of arryTampungTickets) {
             const available_limit = ticket.ticket_id.available_limit - ticket.quantity;
@@ -115,21 +136,36 @@ const checkout =  async (req, res) => {
         })
 
     } catch (error) {
-        orderList.delateById(rolebackOrder);
-
-        for (const item of roleBackItems) {
-            orderItemList.delateById(item);
+        if (rolebackOrder) {
+            orderList.delateById(rolebackOrder);
         }
 
-        for (const qr of roleBackQrs) {
-            qrList.delateById(qr);
+        if (roleBackItems.length) {
+            for (const item of roleBackItems) {
+                orderItemList.delateById(item);
+            }
         }
 
-        for (const tampung of arryTampungTickets) {
-            ticketList.updateById(tampung.ticket_id.id, {
-                available_limit: tampung.ticket_id.available_limit
-            });
+        if (roleBackQrs.length) {
+            for (const qr of roleBackQrs) {
+                qrList.delateById(qr);
+            }
         }
+
+        if (arryTampungTickets.length) {
+            for (const tampung of arryTampungTickets) {
+                ticketList.updateById(tampung.ticket_id.id, {
+                    available_limit: tampung.ticket_id.available_limit
+                });
+            }
+        }
+
+        if (roleBackUserT.length) {
+            for (const tUser of roleBackUserT) {
+                userWalletTransactionList.delateById(tUser);
+            }
+        }
+
 
         return res.status(500).json({
             status: "Gagal",

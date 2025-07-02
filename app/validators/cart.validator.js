@@ -4,7 +4,7 @@ const { cartList } = require('../model/cart.model');
 const { body, param, query, check } = require('express-validator');
 
 const createValidatorCart = [
-    body['quantity']
+    body('quantity')
         .notEmpty().withMessage('jumlah tidak boleh kosong')
         .custom((value, { req }) => {
             const quantity = parseInt(req.body.quantity);
@@ -16,7 +16,7 @@ const createValidatorCart = [
             return true;
         }),
 
-    body['ticket_id']
+    body('ticket_id')
         .notEmpty().withMessage('ticket_id tidak boleh kosong')
         .custom((value, { req }) => {
             const ticket = ticketList.findById(req.body.ticket_id);
@@ -30,7 +30,7 @@ const createValidatorCart = [
 ]
 
 const viewValidatorCart = [
-    param['userId']
+    param('userId')
         .notEmpty().withMessage('Param tidak boleh kosong')
         .custom((value ,{req}) => {
             if (req.user.id != req.params.userId) {
@@ -41,7 +41,7 @@ const viewValidatorCart = [
 ]
 
 const updateValidatorCart = [
-    body['quantity']
+    body('quantity')
         .notEmpty().withMessage('jumlah tidak boleh kosong')
         .custom((value, { req }) => {
             const quantity = parseInt(req.body.quantity);
@@ -53,7 +53,7 @@ const updateValidatorCart = [
             return true;
         }),
 
-    param['cartId']
+    param('cartId')
         .notEmpty().withMessage('cart_id tidak boleh kosong')
         .custom((value, { req }) => {
             const userId = req.user.id;
@@ -68,7 +68,7 @@ const updateValidatorCart = [
 ]
 
 const delateValidatorCart = [
-    param['cartId']
+    param('cartId')
         .notEmpty().withMessage('cart_id tidak boleh kosong')
         .custom((value, { req }) => {
             const userId = req.user.id;

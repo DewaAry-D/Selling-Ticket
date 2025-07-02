@@ -34,7 +34,7 @@ class OrderItemList {
     }
 
     append(id, order_id, ticket_id, quantitiy, price, total_price,) {
-        const newNode = new CartNode(id, order_id, ticket_id, quantitiy, price, total_price, new Date(), new Date());
+        const newNode = new OrderItemNode(id, order_id, ticket_id, quantitiy, price, total_price, new Date(), new Date());
         if (!this.head) {
             this.head = this.tail = newNode;
         } else {
@@ -70,7 +70,7 @@ class OrderItemList {
             return null; 
     }
 
-    delateById(cart_id) {
+    delateById(oItem_id) {
         if (this.head === null) {
             return { error: true, message: "Data ksosong"};
         }
@@ -78,7 +78,7 @@ class OrderItemList {
         let current = this.head;
 
         while(current) {
-            if (current.id === cart_id) {
+            if (current.id === oItem_id) {
                 if (current.prev) {
                     current.prev.next = current.next;
                 } else {

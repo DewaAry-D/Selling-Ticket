@@ -16,8 +16,7 @@ setInterval(() => {
   nextSlide();
 }, 4000);
 
- function togglePopover() {
+function togglePopover() {
     const popover = document.getElementById('my-popover');
     popover.classList.toggle('hidden');
   }
-  
