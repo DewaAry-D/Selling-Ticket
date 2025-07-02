@@ -11,10 +11,6 @@ const { cartList } = require('../model/cart.model');
 const { orderList } = require('../model/order.model');
 const { orderItemList } = require('../model/order_item.model');
 const { qrList } = require('../model/qr_code.modul');
-const { userWalletList } = require('../model/user_wallet.model');
-const { userWalletTransactionList } = require('../model/user_wallet_transaction.model');
-const { adminWaletList } = require('../model/admin_wallet.model');
-const { adminWaletTransactionList } = require('../model/admin_wallet_transaction.model');
 
 const qrFolderPath = path.join(__dirname, '../public/', 'qrcodes');
 if (!fs.existsSync(qrFolderPath)) {
@@ -36,8 +32,6 @@ const checkout =  async (req, res) => {
     let rolebackOrder;
     let roleBackItems = [];
     let roleBackQrs = [];
-    let roleBackUserT = [];
-    let roleBackAdminT;
 
     let arryTampungTickets = [];
 
@@ -105,19 +99,11 @@ const checkout =  async (req, res) => {
                 origin_avilable_limit: cart.ticket_id.available_limit
             });
 
-            //user walet
-            const walletPenjual = userWalletList.findByUserId(cart.ticket_id.user_id.id);
-            const wTransactionId = uuidv4();
-            userWalletTransactionList.append(wTransactionId, walletPenjual, "kredit", totalPrice, orderItem,);
-            roleBackUserT.push(wTransactionId);
         }
 
         
         total += fee;
         orderList.updateById(orderItem.id, { total_price: total });
-        //admin walet
-        const uTransactionId = uuidv4();
-        adminWaletList.append(uTransactionId, )
 
 
         for (const ticket of arryTampungTickets) {
@@ -159,13 +145,7 @@ const checkout =  async (req, res) => {
                 });
             }
         }
-
-        if (roleBackUserT.length) {
-            for (const tUser of roleBackUserT) {
-                userWalletTransactionList.delateById(tUser);
-            }
-        }
-
+        
 
         return res.status(500).json({
             status: "Gagal",

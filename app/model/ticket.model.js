@@ -170,6 +170,10 @@ class TicketList {
     show(query) {
         let { search = '', tema = '', status = '', page = 1, limit = 10 } = query;
 
+        search = String(search || '');
+        tema = String(tema || '');
+        status = String(status || '');
+        
         if (tema === 'semua') {
             tema = '';
         }

@@ -20,6 +20,6 @@ router.post('/login', loginValidator, login);
 
 // router.get('/show', show);
 
-router.get('/dashboard', authMiddleware, showTicket);
+
 
 module.exports = router;
