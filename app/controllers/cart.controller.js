@@ -67,21 +67,23 @@ const showCart = (req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
     let total = 0;
-    const data = cartList.findAll(req.user.id);
+    const datas = cartList.findAll(req.user.id);
 
-    if (data) {
+    if (datas) {
         total += 10000;
-        cartList.array.forEach(item => {
-            total += item.total_price;
+        datas.forEach(item => {
+            total += item.total;
         });
     }
 
-    return res.status(200).json({
-        status: "sukses",
-        message: "Cart berhasil didapatkan",
-        data : data,
-        total: total
-    });
+    // return res.status(200).json({
+    //     status: "sukses",
+    //     message: "Cart berhasil didapatkan",
+    //     data : data,
+    //     total: total
+    // });
+
+    return res.render('cart', { datas, total });
 }
 
 module.exports = {
