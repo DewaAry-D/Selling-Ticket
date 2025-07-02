@@ -21,6 +21,7 @@ class TicketApplicationNode {
         is_rejected = false,
         reject_message = null,
         created_at,
+        updated_at
     }) {
         this.id = id;                         
         this.user_id = user_id;                   

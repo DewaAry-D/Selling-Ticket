@@ -214,6 +214,9 @@
   .z-10 {
     z-index: 10;
   }
+  .m-5 {
+    margin: calc(var(--spacing) * 5);
+  }
   .mx-8 {
     margin-inline: calc(var(--spacing) * 8);
   }
@@ -262,23 +265,50 @@
   .mt-14 {
     margin-top: calc(var(--spacing) * 14);
   }
+  .mt-\[1px\] {
+    margin-top: 1px;
+  }
+  .mt-\[12px\] {
+    margin-top: 12px;
+  }
+  .mt-\[100px\] {
+    margin-top: 100px;
+  }
+  .mt-\[120px\] {
+    margin-top: 120px;
+  }
   .mt-\[130px\] {
     margin-top: 130px;
   }
   .mr-3 {
     margin-right: calc(var(--spacing) * 3);
   }
+  .mr-5 {
+    margin-right: calc(var(--spacing) * 5);
+  }
   .mr-16 {
     margin-right: calc(var(--spacing) * 16);
   }
+  .mr-\[0px\] {
+    margin-right: 0px;
+  }
+  .mr-\[12px\] {
+    margin-right: 12px;
+  }
   .mr-\[25px\] {
     margin-right: 25px;
+  }
+  .mr-\[120px\] {
+    margin-right: 120px;
   }
   .mr-\[129px\] {
     margin-right: 129px;
   }
   .ml-3 {
     margin-left: calc(var(--spacing) * 3);
+  }
+  .ml-5 {
+    margin-left: calc(var(--spacing) * 5);
   }
   .ml-\[15px\] {
     margin-left: 15px;
@@ -291,6 +321,9 @@
   }
   .ml-\[100px\] {
     margin-left: 100px;
+  }
+  .block {
+    display: block;
   }
   .flex {
     display: flex;
@@ -336,14 +369,35 @@
   .w-1\/2 {
     width: calc(1/2 * 100%);
   }
+  .w-\[10\%\] {
+    width: 10%;
+  }
+  .w-\[10\] {
+    width: 10;
+  }
   .w-\[35px\] {
     width: 35px;
+  }
+  .w-\[40\%\] {
+    width: 40%;
+  }
+  .w-\[40\] {
+    width: 40;
   }
   .w-\[50\%\] {
     width: 50%;
   }
+  .w-\[50\] {
+    width: 50;
+  }
   .w-\[60px\] {
     width: 60px;
+  }
+  .w-\[90\%\] {
+    width: 90%;
+  }
+  .w-\[90\] {
+    width: 90;
   }
   .w-\[400px\] {
     width: 400px;
@@ -353,6 +407,9 @@
   }
   .w-\[680px\] {
     width: 680px;
+  }
+  .w-\[1200px\] {
+    width: 1200px;
   }
   .w-\[1226px\] {
     width: 1226px;
@@ -420,6 +477,9 @@
   .gap-5 {
     gap: calc(var(--spacing) * 5);
   }
+  .gap-8 {
+    gap: calc(var(--spacing) * 8);
+  }
   .gap-\[80px\] {
     gap: 80px;
   }
@@ -435,6 +495,9 @@
   }
   .overflow-hidden {
     overflow: hidden;
+  }
+  .overflow-x-hidden {
+    overflow-x: hidden;
   }
   .rounded {
     border-radius: 0.25rem;
@@ -513,6 +576,12 @@
   }
   .p-2 {
     padding: calc(var(--spacing) * 2);
+  }
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
+  }
+  .p-6 {
+    padding: calc(var(--spacing) * 6);
   }
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
