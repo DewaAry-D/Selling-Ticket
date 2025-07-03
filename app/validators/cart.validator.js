@@ -57,10 +57,10 @@ const updateValidatorCart = [
         .notEmpty().withMessage('cart_id tidak boleh kosong')
         .custom((value, { req }) => {
             const userId = req.user.id;
-            const cart = cartList.updateById(req.params.cartId);
+            const cart = cartList.findById(req.params.cartId);
 
             if (userId !== cart.user_id.id ) {
-                throw new Error('salah input quantity');
+                throw new Error('tidak ditemukan');
             }
 
             return true;

@@ -135,7 +135,7 @@ class TicketList {
     findById(id) {
         let current = this.head;
         while (current) {
-            if (current.id === id) {
+            if (current.id == parseInt(id)) {
                 return current;
             }
             current = current.next;
@@ -168,32 +168,21 @@ class TicketList {
     }
 
     show(query) {
-        let { search = '', tema = '', status = '', page = 1, limit = 10 } = query;
+        let { tema = '', page = 1, limit = 10 } = query;
 
-        if (tema === 'semua') {
-            tema = '';
-        }
+        // status = String(status || '');
 
         let current = this.head;
         const result = [];
 
         while (current) {
-            const matchSearch = search
-                ? (current.name.toLowerCase().includes(search.toLowerCase())) : true;
 
             const matchTema = tema
                 ? current.theme.toLowerCase() === tema.toLowerCase() : true;
 
-            const matchStatus =
-                status === 'accepted' ? current.is_accepted :
-                status === 'rejected' ? current.is_rejected :
-                true;
-
             const time = new Date();
 
-            if (matchSearch && 
-                matchTema && 
-                matchStatus && 
+            if (matchTema &&  
                 time >= current.start_date && 
                 time <= current.end_date && 
                 current.available_limit > 0) {
@@ -218,6 +207,18 @@ class TicketList {
                 totalPages: Math.ceil(result.length / limitInt)
             }
         };
+    }
+
+    findAll() {
+        let current = this.head;
+        const result = [];
+
+        while(current) {
+            result.push(current);
+            current = current.next;
+        }
+
+        return result;
     }
 }
 

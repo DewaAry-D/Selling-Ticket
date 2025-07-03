@@ -11,16 +11,11 @@ const { cartList } = require('../model/cart.model');
 const { orderList } = require('../model/order.model');
 const { orderItemList } = require('../model/order_item.model');
 const { qrList } = require('../model/qr_code.modul');
-const { userWalletList } = require('../model/user_wallet.model');
-const { userWalletTransactionList } = require('../model/user_wallet_transaction.model');
-const { adminWaletList } = require('../model/admin_wallet.model');
-const { adminWaletTransactionList } = require('../model/admin_wallet_transaction.model');
 
 const qrFolderPath = path.join(__dirname, '../public/', 'qrcodes');
 if (!fs.existsSync(qrFolderPath)) {
-    fs.mkdirSync(qrFolderPath);
+    fs.mkdirSync(qrFolderPath, { recursive: true });
 }
-
 
 const checkout =  async (req, res) => {
     const carts = cartList.findAll(req.user.id);
@@ -32,92 +27,115 @@ const checkout =  async (req, res) => {
         });
     }
 
+    console.log(`step ini lolos 1`);
+
     let fee = 10000;
     let rolebackOrder;
     let roleBackItems = [];
     let roleBackQrs = [];
-    let roleBackUserT = [];
-    let roleBackAdminT;
 
     let arryTampungTickets = [];
 
+    console.log(`step ini lolos 2`);
+
     try {
+        console.log(`step ini lolos 3`);
+
         const orderId = uuidv4();
         const orderNumber = 'RES-' + Date.now() + '-' + Math.round(Math.random() * 1E9);
 
+        console.log(`step ini lolos 4`);
+
+        const user = userList.findById(req.user.id);
+
+        console.log(`step ini lolos 5`);
         let total = 0;
-        const order = orderList.append(orderId, carts[0].user_id, orderNumber,total);
-
+        const order = orderList.append(orderId, user, orderNumber, total);
+        console.log(`step ini lolos 6`);
         rolebackOrder = order.id;
+        
 
-        //oreder items
-        for (const cart of carts) {
-            const orderItemId = uuidv4();
-            //mmasukkan ke linkedlist
-            const totalPrice = cart.quantity * cart.ticket_id.price;
+        for (const cart of carts) { 
+            // const ticket = ticketList.findById(cart.ticket_id.id); // ambil objek tiket
+            const ticket = cart.ticket_id;
+
+            console.log(`ini isi cart.ticket_id ${ticket.id}`);
+
+            if (!ticket) {
+                throw new Error('ticket_id is not defined');
+            }
+
+
+
+            const totalPrice = cart.quantity * ticket.price;
             total += totalPrice;
 
-            let limit = cart.ticket_id.available_limit;
+            let limit = ticket.available_limit;
 
-            const orderItem = orderItemList.append(orderItemId, orderId, cart.ticket_id, cart.quantity, cart.ticket_id.price, totalPrice);
 
+            console.log("order", order);      // seharusnya berisi order_id atau OrderNode
+            console.log("ticket", ticket);    // seharusnya berisi ticket_id atau TicketNode
+            console.log("cart.quantity", cart.quantity);
+            console.log("ticket.price", ticket.price);
+            console.log("totalPrice", totalPrice);
+
+
+            const orderItemId = uuidv4();
+            const orderItem = orderItemList.append(
+                orderItemId,
+                order,
+                ticket,
+                cart.quantity,
+                ticket.price,
+                totalPrice
+            );
+
+            console.log(`step ini lolos 7`);
+            
             roleBackItems.push(orderItem.id);
 
             let count = 1;
-            //qrcode
             for (let i = cart.quantity; i > 0; i--) {
                 const qr_id = uuidv4();
-                const ticketCode = cart.ticket_id.code + '-' + (cart.ticket_id.limit - cart.ticket_id.available_limit + count);
+                const ticketCode = ticket.code + '-' + (ticket.limit - ticket.available_limit + count);
+
                 const jsonData = {
                     id: qr_id,
-                    username:cart.user_id.username,
-                    namatiket: cart.ticket_id.name,
+                    username: cart.user_id.username,
+                    namatiket: ticket.name,
                     code: ticketCode,
-                    type: cart.ticket_id.type_tickets,
-                    batch: cart.ticket_id.batch
-                }
+                    type: ticket.type_tickets,
+                    batch: ticket.batch
+                };
 
                 limit -= 1;
                 if (limit <= 0) {
-                    throw new Error(`jumlah ticket untuk ticket ${cart.ticket_id}`);
-                    
+                    throw new Error(`jumlah ticket untuk ticket ${ticket.name} telah habis`);
                 }
 
-                //buat qrcode
                 const stringified = JSON.stringify(jsonData, null, 2);
                 const fileName = `qrjson-${Date.now()}-${Math.round(Math.random() * 1E9)}.png`;
                 const filePath = path.join(qrFolderPath, fileName);
                 await QRCode.toFile(filePath, stringified);
 
-                //masukkan ke linkedlist
                 qrList.append(qr_id, orderItemId, ticketCode, filePath);
-
                 roleBackQrs.push(qr_id);
-            
-                //tambah count
                 count++;
             }
 
-            //backup demi menjaga jumlah ticket
-            arryTampungTickets.push({
-                ticket_id: cart.ticket_id,
-                quantity: cart.quantity,
-                origin_avilable_limit: cart.ticket_id.available_limit
-            });
+            console.log(`step ini lolos 8`);
 
-            //user walet
-            const walletPenjual = userWalletList.findByUserId(cart.ticket_id.user_id.id);
-            const wTransactionId = uuidv4();
-            userWalletTransactionList.append(wTransactionId, walletPenjual, "kredit", totalPrice, orderItem,);
-            roleBackUserT.push(wTransactionId);
+            arryTampungTickets.push({
+                ticket_id: ticket,
+                quantity: cart.quantity,
+                origin_avilable_limit: ticket.available_limit
+            });
         }
 
-        
+        console.log(`step ini lolos 9`);
         total += fee;
-        orderList.updateById(orderItem.id, { total_price: total });
-        //admin walet
-        const uTransactionId = uuidv4();
-        adminWaletList.append(uTransactionId, )
+        orderList.updateById(order.id, { total_price: total });
+        console.log(`step ini lolos 10`);
 
 
         for (const ticket of arryTampungTickets) {
@@ -125,15 +143,18 @@ const checkout =  async (req, res) => {
             ticketList.updateById(ticket.ticket_id.id, {available_limit: available_limit});
         }
 
+        console.log(`step ini lolos 11`);
         //hapus cart
         for (const cart of carts) {
             cartList.delateById(cart.id);
         }
+        console.log(`step ini lolos 12`);
 
-        return res.status(201).json({
-            status: "sukses",
-            message: "Ticket berhasil dibeli"
-        })
+        // return res.status(201).json({
+        //     status: "sukses",
+        //     message: "Ticket berhasil dibeli"
+        // })
+        return res.redirect(`/cart/${req.user.id}`);
 
     } catch (error) {
         if (rolebackOrder) {
@@ -159,17 +180,15 @@ const checkout =  async (req, res) => {
                 });
             }
         }
-
-        if (roleBackUserT.length) {
-            for (const tUser of roleBackUserT) {
-                userWalletTransactionList.delateById(tUser);
-            }
-        }
-
+        
 
         return res.status(500).json({
             status: "Gagal",
             message: error.message
         })
     }
+}
+
+module.exports = {
+    checkout
 }

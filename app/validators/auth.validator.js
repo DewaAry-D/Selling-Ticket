@@ -29,8 +29,8 @@ const registerValidator = [
     }),
     
   body('username')
-    .isLength({ min: 6 }).withMessage('Password minimal 6 karakter')
-    .notEmpty().trim().withMessage('Password minimal 6 karakter'),
+    .isLength({ min: 6 }).withMessage('Username minimal 3 karakter')
+    .notEmpty().trim().withMessage(' minimal 3 karakter'),
 
   body('name')
     .notEmpty().withMessage('Nama tidak boleh kosong')

@@ -8,7 +8,6 @@ dotenv.config();
 
 const { userList } = require('../model/user.model');
 const { biodataList } = require('../model/biodata.model');
-const { userWalletList } = require('../model/user_wallet.model');
 
 
 const register = async (req, res) => {
@@ -26,15 +25,15 @@ const register = async (req, res) => {
 
     const newUser = userList.append(userId, data.username, data.email, hashedPassword);
     const newBiodata = biodataList.append(biodataId, newUser, data.name, data.date_of_birth, data.phone_number, data.province, data.city, data.address, fotoProfile);
-    const newWallet = userWalletList.append(walletId, newUser);
 
-    return res.status(201).json({
-        status: "sukses",
-        message: "User berhasil dibuat",
-        user: newUser,
-        biodata: newBiodata,
-        newWallet: newWallet
-    })
+    // return res.status(201).json({
+    //     status: "sukses",
+    //     message: "User berhasil dibuat",
+    //     user: newUser,
+    //     biodata: newBiodata,
+    //     newWallet: newWallet
+    // })
+    return res.redirect('/login')
 }
 
 const show = async (req, res) => {
@@ -67,7 +66,7 @@ const  login = async (req, res) => {
         httpOnly: true,
         secure: false, 
         sameSite: 'Strict',
-        maxAge: 60 * 60 * 6
+        maxAge: 6 * 60 * 60 * 1000
     });
 
     // res.status(200).json({
