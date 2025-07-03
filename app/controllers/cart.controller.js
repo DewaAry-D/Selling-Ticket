@@ -66,13 +66,21 @@ const showCart = (req, res) => {
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
-
+    let total = 0;
     const data = cartList.findAll(req.user.id);
+
+    if (data) {
+        total += 10000;
+        cartList.array.forEach(item => {
+            total += item.total_price;
+        });
+    }
 
     return res.status(200).json({
         status: "sukses",
         message: "Cart berhasil didapatkan",
-        data : data
+        data : data,
+        total: total
     });
 }
 
