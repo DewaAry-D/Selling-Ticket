@@ -43,7 +43,6 @@ class CartList {
         return newNode;
     }
 
-
     updateById(id, newData) {
         let current = this.head;
 
@@ -92,6 +91,17 @@ class CartList {
             return { sukses: true, message: "Cart berhasil dihapus", data: current };
             }
         }
+    }
+
+    findById(id) {
+        let current = this.head;
+        while (current) {
+            if (current.id === id) {
+                return current;
+            }
+            current = current.next;
+        }
+        return null;
     }
 
     findAll(user_id) {

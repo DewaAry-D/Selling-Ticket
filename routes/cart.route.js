@@ -6,9 +6,9 @@ const { authMiddleware } = require('../app/middlewares/auth.middleware');
 
 const router = Router();
 
-router.get('/cart:userId', authMiddleware, viewValidatorCart, showCart);
-router.post('/cart:cartId', authMiddleware, createValidatorCart, createCart);
-router.patch('/cart/:cartId', authMiddleware, updateValidatorCart, updateCart);
+router.get('/cart/:userId', authMiddleware, viewValidatorCart, showCart);
+router.post('/cart/:userId', authMiddleware, createValidatorCart, createCart);
+router.patch('/cart/:cartId', authMiddleware, updateValidatorCart,updateCart);
 router.delete('/cart/:cartId', authMiddleware, delateValidatorCart, delateCart);
 
 module.exports = router;

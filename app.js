@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 const authRoutes = require('./routes/auth.route');
 const dasbordRoutes = require('./routes/dasbord.route');
 const cartRoutes = require('./routes/cart.route');
+const checkoutRoutes = require('./routes/checkout.route');
 
 // app.get('/', (req, res) => {
 //     const data = "ary"; 
@@ -32,11 +33,14 @@ const cartRoutes = require('./routes/cart.route');
 // });
 
 seedDummyTickets(ticketList);
+// console.log(ticketList.findAll());
 
 
 app.use('/', authRoutes);
 app.use('/', dasbordRoutes);
 app.use('/', cartRoutes);
+app.use('/', checkoutRoutes);
+
 
 app.listen(process.env.PORT, () => {
     console.log(`Example app listening on port ${process.env.PORT}`);

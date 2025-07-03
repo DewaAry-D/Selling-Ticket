@@ -9,8 +9,9 @@ const showTicket = (req, res) => {
     }
 
     const tickets = data.data;
+    const user = req.user;
 
-    return res.render('dashboard', {tickets});
+    return res.render('dashboard', {tickets, user});
 };
 
 
