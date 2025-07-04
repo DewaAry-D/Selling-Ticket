@@ -26,6 +26,7 @@ const authRoutes = require('./routes/auth.route');
 const dasbordRoutes = require('./routes/dasbord.route');
 const cartRoutes = require('./routes/cart.route');
 const checkoutRoutes = require('./routes/checkout.route');
+const historyRoutes = require('./routes/history.route');
 
 // app.get('/', (req, res) => {
 //     const data = "ary"; 
@@ -40,6 +41,7 @@ app.use('/', authRoutes);
 app.use('/', dasbordRoutes);
 app.use('/', cartRoutes);
 app.use('/', checkoutRoutes);
+app.use('/', historyRoutes);
 
 
 app.listen(process.env.PORT, () => {

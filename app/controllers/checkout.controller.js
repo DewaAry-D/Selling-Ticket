@@ -12,7 +12,8 @@ const { orderList } = require('../model/order.model');
 const { orderItemList } = require('../model/order_item.model');
 const { qrList } = require('../model/qr_code.modul');
 
-const qrFolderPath = path.join(__dirname, '../public/', 'qrcodes');
+const qrFolderPath = path.join(process.cwd(), 'public', 'qrcodes');
+
 if (!fs.existsSync(qrFolderPath)) {
     fs.mkdirSync(qrFolderPath, { recursive: true });
 }

@@ -92,7 +92,7 @@ class OrderList {
         }
     }
 
-    show(user_id) {
+    findAll(user_id) {
         let current = this.head;
         const result = [];
 
@@ -106,6 +106,7 @@ class OrderList {
 
         return result;
     }
+
 }
 
 const orderList = new OrderList();

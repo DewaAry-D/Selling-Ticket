@@ -90,12 +90,12 @@ class QrList {
         }
     }
 
-    show(user_id) {
+    findAll(id) {
         let current = this.head;
         const result = [];
 
         while(current) {
-            if (current.user_id.id === user_id) {
+            if (current.orderitems_id.id === id) {
                 result.push(current);
             }
 

@@ -56,40 +56,6 @@ const updateCart = (req, res) => {
 }
 
 
-// const updateCart = (req, res) => {
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//         return res.status(400).json({ errors: errors.array() });
-//     }
-
-//     const cartId = req.params.cartId;
-//     const cart = cartList.findById(cartId);
-
-//     if (!cart) {
-//         return res.status(404).json({ error: "Cart item tidak ditemukan" });
-//     }
-
-//     const ticket = ticketList.findById(cart.ticket_id);
-//     if (!ticket) {
-//         return res.status(404).json({ error: "Ticket tidak ditemukan" });
-//     }
-
-//     const quantity = parseInt(req.body.quantity);
-//     if (isNaN(quantity) || quantity <= 0) {
-//         return res.status(400).json({ error: "Jumlah tiket tidak valid" });
-//     }
-
-//     const total = quantity * ticket.price;
-//     const data = cartList.updateById(cartId, { quantity, total });
-
-//     const user = req.user;
-//     if (!user) {
-//         return res.status(401).json({ error: "User tidak terautentikasi" });
-//     }
-
-//     res.redirect(`/cart/${user.id}`);
-// };
-
 
 const delateCart = (req, res) => {
     const errors = validationResult(req);
@@ -114,6 +80,7 @@ const showCart = (req, res) => {
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
+    
     let total = 0;
     const datas = cartList.findAll(req.user.id);
 

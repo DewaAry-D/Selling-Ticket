@@ -1,3 +1,5 @@
+
+
 class OrderItemNode {
     constructor(id, order_id, ticket_id, quantitiy, price, total_price, created_at, updated_at) {
         this.id = id;
@@ -96,12 +98,12 @@ class OrderItemList {
         }
     }
 
-    show(user_id) {
+    findAll(id) {
         let current = this.head;
         const result = [];
 
         while(current) {
-            if (current.user_id.id === user_id) {
+            if (current.order_id.id === id) {
                 result.push(current);
             }
 
