@@ -28,7 +28,6 @@ const checkout =  async (req, res) => {
         });
     }
 
-    console.log(`step ini lolos 1`);
 
     let fee = 10000;
     let rolebackOrder;
@@ -37,22 +36,16 @@ const checkout =  async (req, res) => {
 
     let arryTampungTickets = [];
 
-    console.log(`step ini lolos 2`);
 
     try {
-        console.log(`step ini lolos 3`);
 
         const orderId = uuidv4();
         const orderNumber = 'RES-' + Date.now() + '-' + Math.round(Math.random() * 1E9);
 
-        console.log(`step ini lolos 4`);
-
         const user = userList.findById(req.user.id);
 
-        console.log(`step ini lolos 5`);
         let total = 0;
         const order = orderList.append(orderId, user, orderNumber, total);
-        console.log(`step ini lolos 6`);
         rolebackOrder = order.id;
         
 
@@ -66,20 +59,10 @@ const checkout =  async (req, res) => {
                 throw new Error('ticket_id is not defined');
             }
 
-
-
             const totalPrice = cart.quantity * ticket.price;
             total += totalPrice;
 
             let limit = ticket.available_limit;
-
-
-            console.log("order", order);      // seharusnya berisi order_id atau OrderNode
-            console.log("ticket", ticket);    // seharusnya berisi ticket_id atau TicketNode
-            console.log("cart.quantity", cart.quantity);
-            console.log("ticket.price", ticket.price);
-            console.log("totalPrice", totalPrice);
-
 
             const orderItemId = uuidv4();
             const orderItem = orderItemList.append(
@@ -91,7 +74,7 @@ const checkout =  async (req, res) => {
                 totalPrice
             );
 
-            console.log(`step ini lolos 7`);
+            console.log(orderItem);
             
             roleBackItems.push(orderItem.id);
 
@@ -119,12 +102,12 @@ const checkout =  async (req, res) => {
                 const filePath = path.join(qrFolderPath, fileName);
                 await QRCode.toFile(filePath, stringified);
 
-                qrList.append(qr_id, orderItemId, ticketCode, filePath);
+                const qr = qrList.append(qr_id, orderItem, ticketCode, fileName);
+                console.log(qr);
                 roleBackQrs.push(qr_id);
                 count++;
             }
 
-            console.log(`step ini lolos 8`);
 
             arryTampungTickets.push({
                 ticket_id: ticket,
@@ -133,10 +116,8 @@ const checkout =  async (req, res) => {
             });
         }
 
-        console.log(`step ini lolos 9`);
         total += fee;
         orderList.updateById(order.id, { total_price: total });
-        console.log(`step ini lolos 10`);
 
 
         for (const ticket of arryTampungTickets) {
@@ -144,17 +125,11 @@ const checkout =  async (req, res) => {
             ticketList.updateById(ticket.ticket_id.id, {available_limit: available_limit});
         }
 
-        console.log(`step ini lolos 11`);
         //hapus cart
         for (const cart of carts) {
             cartList.delateById(cart.id);
         }
-        console.log(`step ini lolos 12`);
 
-        // return res.status(201).json({
-        //     status: "sukses",
-        //     message: "Ticket berhasil dibeli"
-        // })
         return res.redirect(`/cart/${req.user.id}`);
 
     } catch (error) {

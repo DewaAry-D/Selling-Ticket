@@ -168,7 +168,7 @@ class TicketList {
     }
 
     show(query) {
-        let { tema = '', page = 1, limit = 10 } = query;
+        let { tema = ''} = query;
 
         // status = String(status || '');
 
@@ -192,20 +192,8 @@ class TicketList {
             current = current.next;
         }
 
-        // Pagination logic
-        const pageInt = parseInt(page);
-        const limitInt = parseInt(limit);
-        const startIndex = (pageInt - 1) * limitInt;
-        const paginated = result.slice(startIndex, startIndex + limitInt);
-
         return {
-            data: paginated,
-            meta: {
-                total: result.length,
-                page: pageInt,
-                limit: limitInt,
-                totalPages: Math.ceil(result.length / limitInt)
-            }
+            data: result,
         };
     }
 

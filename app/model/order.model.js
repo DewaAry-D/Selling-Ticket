@@ -48,7 +48,7 @@ class OrderList {
         while (current) {
             if (current.id === id) {
                 // Update properti satu per satu jika ada
-                const unProtectedFields = ['total'];//key yang boleh diupdate
+                const unProtectedFields = ['total_price'];//key yang boleh diupdate
 
                 for (let key in newData) {
                     if (key in current && unProtectedFields.includes(key)) {

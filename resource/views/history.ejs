@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/output.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>TX Ticket</title>
+</head>
+<body>
+    <div class="relative w-full flex h-screen">
+        <div class="w-[25%] h-full border-r-2 border-black">
+            <a href="/dashboard" class="block border-b-2">
+                <img src="/assets/logo-removebg-preview.png" alt="" class="w-[100px] mx-2 my-2">
+            </a>
+            
+            <div class="border-black border-b-2 flex justify-center flex-col items-center py-7">
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="164" height="164" viewBox="0 0 164 164" fill="none" class="w-[120px] h-[120px]">
+                    <circle cx="82" cy="82" r="82" fill="#D9D9D9"/>
+                </svg> -->
+                <div class="h-[120px]">
+                    <img src="/foto_profile/<%= biodata.foto_profile %>" alt="" class="rounded-full h-[120px]">
+                </div>
+                <h2 class="font-poppins text-black text-3xl mt-4">
+                    <%= biodata.user_id.username %>
+                </h2>
+            </div>
+            <div class="grid justify-center items-center">
+                <a href="/dashboard" class="grid grid-cols-[5%_95%] item-center gap-10 pt-8 items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none" class="w-w-[35px] h-[35px]">
+                        <path d="M16.3474 6.28219C16.2544 6.19317 16.1305 6.14349 16.0018 6.14349C15.873 6.14349 15.7492 6.19317 15.6562 6.28219L4.1499 17.2741C4.10104 17.3208 4.06216 17.377 4.03563 17.4392C4.00909 17.5014 3.99545 17.5683 3.99553 17.6359L3.99365 27.9522C3.99365 28.4826 4.20437 28.9913 4.57944 29.3664C4.95451 29.7415 5.46322 29.9522 5.99365 29.9522H11.9999C12.2651 29.9522 12.5195 29.8468 12.707 29.6593C12.8945 29.4718 12.9999 29.2174 12.9999 28.9522V20.4522C12.9999 20.3196 13.0526 20.1924 13.1463 20.0986C13.2401 20.0049 13.3673 19.9522 13.4999 19.9522H18.4999C18.6325 19.9522 18.7597 20.0049 18.8535 20.0986C18.9472 20.1924 18.9999 20.3196 18.9999 20.4522V28.9522C18.9999 29.2174 19.1053 29.4718 19.2928 29.6593C19.4803 29.8468 19.7347 29.9522 19.9999 29.9522H26.0037C26.5341 29.9522 27.0428 29.7415 27.4179 29.3664C27.7929 28.9913 28.0037 28.4826 28.0037 27.9522V17.6359C28.0037 17.5683 27.9901 17.5014 27.9636 17.4392C27.937 17.377 27.8981 17.3208 27.8493 17.2741L16.3474 6.28219Z" fill="black"/>
+                        <path d="M30.6819 15.7362L26.0069 11.124V4.125C26.0069 3.8515 25.9015 3.58919 25.714 3.3958C25.5265 3.2024 25.2721 3.09375 25.0069 3.09375H22.0069C21.7417 3.09375 21.4873 3.2024 21.2998 3.3958C21.1123 3.58919 21.0069 3.8515 21.0069 4.125V6.1875L17.3869 2.61809C17.0481 2.26488 16.5444 2.0625 16 2.0625C15.4575 2.0625 14.955 2.26488 14.6163 2.61873L1.32252 15.7349C0.933774 16.1217 0.885024 16.7578 1.23877 17.1768C1.32761 17.2825 1.43637 17.3685 1.55846 17.4295C1.68055 17.4905 1.8134 17.5253 1.94892 17.5317C2.08445 17.5381 2.21982 17.516 2.3468 17.4667C2.47378 17.4174 2.5897 17.342 2.68752 17.2451L15.6563 4.46531C15.7493 4.37352 15.8731 4.32229 16.0019 4.32229C16.1307 4.32229 16.2545 4.37352 16.3475 4.46531L29.3175 17.2451C29.5086 17.434 29.7645 17.5371 30.0291 17.5318C30.2938 17.5265 30.5456 17.4132 30.7294 17.2167C31.1131 16.8068 31.0813 16.13 30.6819 15.7362Z" fill="black"/>
+                    </svg>
+                    <p class="text-3xl font-poppins">Dashboard</p>
+                </a>
+                <a href="/history/<%= user.id %>" class="grid grid-cols-[5%_95%] gap-10 pt-[30px] items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none" class="w-[35px] h-[35px]">
+                        <path d="M16 28.875C13.2 28.875 10.7222 27.9987 8.56667 26.246C6.41111 24.4933 5.01111 22.253 4.36667 19.525C4.27778 19.1812 4.34444 18.8664 4.56667 18.5804C4.78889 18.2944 5.08889 18.128 5.46667 18.0812C5.82222 18.0354 6.14444 18.1042 6.43333 18.2875C6.72222 18.4708 6.92222 18.7458 7.03333 19.1125C7.56667 21.175 8.66667 22.8594 10.3333 24.1656C12 25.4719 13.8889 26.125 16 26.125C18.6 26.125 20.8058 25.1914 22.6173 23.3241C24.4289 21.4569 25.3342 19.1822 25.3333 16.5C25.3324 13.8178 24.4271 11.5436 22.6173 9.67725C20.8076 7.81092 18.6018 6.87683 16 6.875C14.4667 6.875 13.0333 7.24167 11.7 7.975C10.3667 8.70833 9.24444 9.71667 8.33333 11H10.6667C11.0444 11 11.3613 11.132 11.6173 11.396C11.8733 11.66 12.0009 11.9863 12 12.375C11.9991 12.7637 11.8711 13.0905 11.616 13.3554C11.3609 13.6203 11.0444 13.7518 10.6667 13.75H5.33333C4.95556 13.75 4.63911 13.618 4.384 13.354C4.12889 13.09 4.00089 12.7637 4 12.375V6.875C4 6.48542 4.128 6.15908 4.384 5.896C4.64 5.63292 4.95644 5.50092 5.33333 5.5C5.71022 5.49908 6.02711 5.63108 6.284 5.896C6.54089 6.16092 6.66844 6.48725 6.66667 6.875V8.73125C7.8 7.26458 9.18356 6.13021 10.8173 5.32812C12.4511 4.52604 14.1787 4.125 16 4.125C17.6667 4.125 19.228 4.45179 20.684 5.10538C22.14 5.75896 23.4067 6.64079 24.484 7.75087C25.5613 8.86096 26.4169 10.1672 27.0507 11.6696C27.6844 13.172 28.0009 14.7822 28 16.5C27.9991 18.2178 27.6827 19.828 27.0507 21.3304C26.4187 22.8328 25.5631 24.139 24.484 25.2491C23.4049 26.3592 22.1382 27.2415 20.684 27.896C19.2298 28.5505 17.6684 28.8768 16 28.875ZM17.3333 15.95L20.6667 19.3875C20.9111 19.6396 21.0333 19.9604 21.0333 20.35C21.0333 20.7396 20.9111 21.0604 20.6667 21.3125C20.4222 21.5646 20.1111 21.6906 19.7333 21.6906C19.3556 21.6906 19.0444 21.5646 18.8 21.3125L15.0667 17.4625C14.9333 17.325 14.8333 17.1705 14.7667 16.9991C14.7 16.8277 14.6667 16.6499 14.6667 16.4656V11C14.6667 10.6104 14.7947 10.2841 15.0507 10.021C15.3067 9.75792 15.6231 9.62592 16 9.625C16.3769 9.62408 16.6938 9.75608 16.9507 10.021C17.2076 10.2859 17.3351 10.6122 17.3333 11V15.95Z" fill="black"/>
+                    </svg>
+                    <p class="text-3xl font-poppins">History</p>
+                </a>
+                <a href="/cart/<%= user.id %>" class="grid grid-cols-[5%_95%] gap-10 pt-[30px] items-center">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 38 38" fill="black" class="w-[35px] h-[35px]">
+                        <path d="M30 30C30.9946 30 31.9484 30.3951 32.6516 31.0984C33.3549 31.8016 33.75 32.7554 33.75 33.75C33.75 34.7446 33.3549 35.6984 32.6516 36.4016C31.9484 37.1049 30.9946 37.5 30 37.5C29.0054 37.5 28.0516 37.1049 27.3484 36.4016C26.6451 35.6984 26.25 34.7446 26.25 33.75C26.25 31.6688 27.9188 30 30 30ZM0 0H6.13125L7.89375 3.75H35.625C36.1223 3.75 36.5992 3.94754 36.9508 4.29918C37.3025 4.65081 37.5 5.12772 37.5 5.625C37.5 5.94375 37.4062 6.2625 37.275 6.5625L30.5625 18.6938C29.925 19.8375 28.6875 20.625 27.2812 20.625H13.3125L11.625 23.6812L11.5688 23.9062C11.5688 24.0306 11.6181 24.1498 11.706 24.2377C11.794 24.3256 11.9132 24.375 12.0375 24.375H33.75V28.125H11.25C10.2554 28.125 9.30161 27.7299 8.59835 27.0266C7.89509 26.3234 7.5 25.3696 7.5 24.375C7.5 23.7188 7.66875 23.1 7.95 22.575L10.5 17.9813L3.75 3.75H0V0ZM11.25 30C12.2446 30 13.1984 30.3951 13.9016 31.0984C14.6049 31.8016 15 32.7554 15 33.75C15 34.7446 14.6049 35.6984 13.9016 36.4016C13.1984 37.1049 12.2446 37.5 11.25 37.5C10.2554 37.5 9.30161 37.1049 8.59835 36.4016C7.89509 35.6984 7.5 34.7446 7.5 33.75C7.5 31.6688 9.16875 30 11.25 30ZM28.125 16.875L33.3375 7.5H9.6375L14.0625 16.875H28.125Z" fill="white"/>
+                    </svg> -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
+                    <p class="text-3xl font-poppins">Cart</p>
+                </a>
+            </div>
+        </div>
+        <div class="w-[75%] h-full relative">
+            <h2 class="text-5xl font-semibold font-poppins mx-14 pt-10 pb-8 items-center"> History Pembelian</h2>
+            <div class="w-[90%] m-auto ">
+                <div>
+                    <table class="w-full">
+                        <thead class="bg-black">
+                            <tr>
+                                <th class="font-medium font-poppins text-xl py-3 rounded-tl-[10px] text-white">No. Pembelian</th>
+                                <th class="font-medium font-poppins text-xl py-3 text-white">Tanggal</th>
+                                <th class="font-medium font-poppins text-xl py-3 text-white">Total Item</th>
+                                <th class="font-medium font-poppins text-xl py-3 text-white">Total Harga</th>
+                                <th class="font-medium font-poppins text-xl py-3 pr-3 rounded-tr-[10px] text-white">View</th>
+                            </tr>
+                        </thead>
+                        <tbody> 
+                            <% orders.forEach((order, index ) => { %>
+                                <tr class="bg-[#E5E5E5]">
+                                    <td class="font-light font-poppins text-xl py-3 text-center bg-[E5E5E5]"><%= order.order_number %></td>
+                                    <% let jumlah = 0; %>
+                                    <% order.orderitems.forEach(item => { %>
+                                        <% jumlah += item.quantity; %>
+                                    <% }) %>
+                                    <td class="font-light font-poppins text-xl py-3 text-center">
+                                        <%= new Date(order.created_at).toLocaleDateString('id-ID', {
+                                            weekday: 'long',    // Senin, Selasa, ...
+                                            year: 'numeric',    // 2024
+                                            month: 'long',      // Januari, Februari, ...
+                                            day: 'numeric'
+                                        }) %>
+                                    </td>
+                                    <td class="font-light font-poppins text-xl py-3 text-center"><%= jumlah %></td>
+                                    <td class="font-light font-poppins text-xl py-3 text-center"><%= order.total_price %></td>
+                                    <td>
+                                        <button popovertarget="View<%= index %>"" class="flex justify-center items-center mx-auto">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none" class="m-auto fill-black hover:fill-blue-400">
+                                                <path d="M17.5002 13.125C16.3398 13.125 15.227 13.5859 14.4066 14.4064C13.5861 15.2269 13.1252 16.3397 13.1252 17.5C13.1252 18.6603 13.5861 19.7731 14.4066 20.5936C15.227 21.4141 16.3398 21.875 17.5002 21.875C18.6605 21.875 19.7733 21.4141 20.5938 20.5936C21.4142 19.7731 21.8752 18.6603 21.8752 17.5C21.8752 16.3397 21.4142 15.2269 20.5938 14.4064C19.7733 13.5859 18.6605 13.125 17.5002 13.125ZM17.5002 24.7917C15.5663 24.7917 13.7116 24.0234 12.3442 22.656C10.9767 21.2885 10.2085 19.4339 10.2085 17.5C10.2085 15.5661 10.9767 13.7115 12.3442 12.344C13.7116 10.9766 15.5663 10.2083 17.5002 10.2083C19.434 10.2083 21.2887 10.9766 22.6561 12.344C24.0236 13.7115 24.7918 15.5661 24.7918 17.5C24.7918 19.4339 24.0236 21.2885 22.6561 22.656C21.2887 24.0234 19.434 24.7917 17.5002 24.7917ZM17.5002 6.5625C10.2085 6.5625 3.98141 11.0979 1.4585 17.5C3.98141 23.9021 10.2085 28.4375 17.5002 28.4375C24.7918 28.4375 31.0189 23.9021 33.5418 17.5C31.0189 11.0979 24.7918 6.5625 17.5002 6.5625Z"/>
+                                            </svg>
+                                        </button>
+                                        <div popover id="View<%= index %>" class="backdrop-blur-2xl w-[50%] items-center bg-[#D9D9D9] rounded-lg shadow-2xl absolute  mx-auto my-auto">
+                                            <div>
+                                                <table class="w-full">
+                                                    <thead class="bg-[#D9D9D9]">
+                                                        <tr>
+                                                            <th class="font-medium font-poppins text-2xl py-3 text-black">Event</th>
+                                                            <th class="font-medium font-poppins text-2xl py-3 text-black">Jumlah</th>
+                                                            <th class="font-medium font-poppins text-2xl py-3 text-black">Total Harga</th>
+                                                            <th class="font-medium font-poppins text-2xl py-3 text-black">Qr Code</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% order.orderitems.forEach(item => { %>
+                                                            <tr class="bg-[#E5E5E5]">
+                                                                <td class="font-light font-poppins text-2xl py-3 text-center bg-[#E5E5E5]"><%= item.ticket_id.name %></td>
+                                                                <td class="font-light font-poppins text-2xl py-3 text-center bg-[#E5E5E5]"><%= item.quantity %></td>
+                                                                <td class="font-light font-poppins text-2xl py-3 text-center bg-[#E5E5E5]"><%= item.total_price %></td>
+                                                                <!-- <td class="font-light font-poppins text-2xl py-3 text-center bg-[#E5E5E5]">
+                                                                    <% item.qrs.forEach((qr, index )=> { %>
+                                                                        <a href="/qrcodes/<%= qr.qr_code %>" target="_blank">LinkQr<%= index + 1 %></a>
+                                                                    <% }) %> 
+                                                                    
+                                                                </td> -->
+                                                                <td class="font-light font-poppins text-2xl py-3 text-center bg-[#E5E5E5] relative">
+                                                                    <div class="inline-block text-left">
+                                                                        <button onclick="toggleDropdown('<%= 'dropdown-' + item.id %>')" type="button" class="inline-flex justify-center w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
+                                                                            Lihat QR
+                                                                        </button>
+                                                                        <div id="<%= 'dropdown-' + item.id %>" class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+                                                                            <div class="py-1 text-left z-60">
+                                                                                <% item.qrs.forEach((qr, index) => { %>
+                                                                                    <a href="/qrcodes/<%= qr.qr_code %>" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                                                                        Link QR <%= index + 1 %>
+                                                                                    </a>
+                                                                                <% }) %>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        <% }) %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>         
+                                    </td> 
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+            <div></div>
+        </div>
+    </div>
+
+<script>
+    function toggleDropdown(id) {
+        const el = document.getElementById(id);
+        if (el.classList.contains('hidden')) {
+            document.querySelectorAll('[id^="dropdown-"]').forEach(e => e.classList.add('hidden'));
+            el.classList.remove('hidden');
+        } else {
+            el.classList.add('hidden');
+        }
+    }
+    // Optional: close dropdown if clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('[onclick^="toggleDropdown"]')) {
+            document.querySelectorAll('[id^="dropdown-"]').forEach(el => el.classList.add('hidden'));
+        }
+    });
+</script>
+</body>
+</html>

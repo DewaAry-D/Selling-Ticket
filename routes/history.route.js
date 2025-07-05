@@ -5,6 +5,6 @@ const { authMiddleware } = require('../app/middlewares/auth.middleware');
 
 const router = Router();
 
-route.get('/history/:userId', authMiddleware, viewValidatorCart, show);
+router.get('/history/:userId', authMiddleware, viewValidatorCart, show);
 
 module.exports = router;

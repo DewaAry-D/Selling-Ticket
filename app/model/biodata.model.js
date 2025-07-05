@@ -97,6 +97,17 @@ class BiodataList {
         return null;
     }
 
+    findByUserId(id) {
+        let current = this.head;
+        while (current) {
+            if (current.user_id.id === id) {
+                return current;
+            }
+            current = current.next;
+        }
+        return null;
+    }
+
     show() {
         let current = this.head;
         let array = [];

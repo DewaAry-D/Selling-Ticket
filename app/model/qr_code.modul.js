@@ -95,7 +95,7 @@ class QrList {
         const result = [];
 
         while(current) {
-            if (current.orderitems_id.id === id) {
+            if (current.orderitem_id.id === id) {
                 result.push(current);
             }
 
@@ -104,6 +104,7 @@ class QrList {
 
         return result;
     }
+
 }
 
 const qrList = new QrList();

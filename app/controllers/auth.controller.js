@@ -20,11 +20,11 @@ const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(data.password, 10);
     const userId = uuidv4();
     const biodataId = uuidv4();
-    const walletId = uuidv4();
-    const fotoProfile = req.file;
+    // const walletId = uuidv4();
+    const pathFoto = req.file.filename;
 
     const newUser = userList.append(userId, data.username, data.email, hashedPassword);
-    const newBiodata = biodataList.append(biodataId, newUser, data.name, data.date_of_birth, data.phone_number, data.province, data.city, data.address, fotoProfile);
+    const newBiodata = biodataList.append(biodataId, newUser, data.name, data.date_of_birth, data.phone_number, data.province, data.city, data.address, pathFoto);
 
     // return res.status(201).json({
     //     status: "sukses",

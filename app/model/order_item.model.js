@@ -1,11 +1,11 @@
 
 
 class OrderItemNode {
-    constructor(id, order_id, ticket_id, quantitiy, price, total_price, created_at, updated_at) {
+    constructor(id, order_id, ticket_id, quantity, price, total_price, created_at, updated_at) {
         this.id = id;
         this.order_id = order_id;
         this.ticket_id = ticket_id;
-        this.quantitiy = quantitiy;
+        this.quantity = quantity;
         this.price = price;
         this.total_price = total_price;
         this.created_at = created_at;
@@ -20,7 +20,7 @@ class OrderItemNode {
             id: this.id,
             order_id: this.order_id,
             ticket_id: this.ticket_id,
-            quantitiy: this.quantitiy,
+            quantity: this.quantity,
             price: this.price,
             total_price: this.total_price,
             created_at: this.created_at,
@@ -35,8 +35,8 @@ class OrderItemList {
         this.tail = null;
     }
 
-    append(id, order_id, ticket_id, quantitiy, price, total_price,) {
-        const newNode = new OrderItemNode(id, order_id, ticket_id, quantitiy, price, total_price, new Date(), new Date());
+    append(id, order_id, ticket_id, quantity, price, total_price,) {
+        const newNode = new OrderItemNode(id, order_id, ticket_id, quantity, price, total_price, new Date(), new Date());
         if (!this.head) {
             this.head = this.tail = newNode;
         } else {
